@@ -1,4 +1,4 @@
-/* Poore page ko center me laane ke liye */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #121212;
@@ -10,7 +10,7 @@ body {
     margin: 0;
 }
 
-/* Main box (Card) ka style */
+
 .container {
     background-color: #1e1e1e;
     padding: 30px;
@@ -26,7 +26,7 @@ h2 {
     color: #4eb5f1;
 }
 
-/* Password dekhne wale input box ka style */
+
 input[type="text"] {
     width: 90%;
     padding: 12px;
@@ -40,7 +40,7 @@ input[type="text"] {
     outline: none;
 }
 
-/* Button ka style */
+
 button {
     width: 100%;
     padding: 12px;
@@ -54,7 +54,7 @@ button {
     transition: 0.3s;
 }
 
-/* Button par mouse le jaane se rang badlega */
+
 button:hover {
     background-color: #3ca0db;
 }
