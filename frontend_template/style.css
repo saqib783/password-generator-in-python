@@ -1,0 +1,60 @@
+/* Poore page ko center me laane ke liye */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Main box (Card) ka style */
+.container {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 350px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #4eb5f1;
+}
+
+/* Password dekhne wale input box ka style */
+input[type="text"] {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+}
+
+/* Button ka style */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4eb5f1;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Button par mouse le jaane se rang badlega */
+button:hover {
+    background-color: #3ca0db;
+}
