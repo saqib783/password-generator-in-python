@@ -6,8 +6,8 @@ A sleek, modern web application that generates secure, random 10-character passw
 
 ## 📸 App Preview
 
-![Application Screenshot](screenshot.png) 
-*(Note: Replace `screenshot.png` with your actual screenshot file name in the root folder)*
+![Application Screenshot](https://github.com/saqib783/password-generator-in-python/blob/50b556647596b5502c1cf31fbf3be02e3b9f3ea4/Screenshot%20(2127).png) 
+
 
 ---
 
