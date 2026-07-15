@@ -28,7 +28,7 @@ myBtn.addEventListener('click',async function(){
     myText.innerText = data.password
   }
   catch(error){
-        console.log("error")
+        console.log(error)
         myText.innerText = "server is not responding "
   }
 })

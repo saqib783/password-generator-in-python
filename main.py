@@ -1,11 +1,10 @@
 import secrets
 import string
-import logging
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse 
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 app = FastAPI()
@@ -26,13 +25,12 @@ def home():
         return  file.read()
 
 class PasswordBase(BaseModel):
-    pass_len: int
+    pass_len: int=Field(default=10, ge=6, le=32)
     special_char: bool
 
 
 @app.post("/passhome")
 def passGen(config:PasswordBase):
-    logger = logging.getLogger("uvicorn.error")
     if config.special_char:
         punctuation_list  = ["!","@","#","$","_","-"]
         punctuation_string = "".join(punctuation_list)
@@ -41,7 +39,5 @@ def passGen(config:PasswordBase):
     else:
         passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits 
         password =   "".join(secrets.choice(passwordChar)for char in range(config.pass_len))
-    logger.info(password)
+    
     return {"password": password}
-
-
