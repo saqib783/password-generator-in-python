@@ -1,4 +1,4 @@
-import random
+import secrets
 import string
 import logging
 from fastapi import FastAPI
@@ -37,10 +37,10 @@ def passGen(config:PasswordBase):
         punctuation_list  = ["!","@","#","$","_","-"]
         punctuation_string = "".join(punctuation_list)
         passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits + punctuation_string
-        password =   "".join(random.choice(passwordChar)for char in range(config.pass_len))
+        password =   "".join(secrets.choice(passwordChar)for char in range(config.pass_len))
     else:
         passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits 
-        password =   "".join(random.choice(passwordChar)for char in range(config.pass_len))
+        password =   "".join(secrets.choice(passwordChar)for char in range(config.pass_len))
     logger.info(password)
     return {"password": password}
 
