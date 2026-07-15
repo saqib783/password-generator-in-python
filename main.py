@@ -1,9 +1,12 @@
 import random
 import string
+import logging
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse 
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
 
 app = FastAPI()
 
@@ -22,17 +25,23 @@ def home():
     with open("frontend_template/index.html","r",encoding="utf-8") as file:
         return  file.read()
 
-@app.get("/passhome")
-def passGen():
-    password = ""
-    passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
-    password =   "".join(random.choice(passwordChar)for char in range(10))
-    return password
+class PasswordBase(BaseModel):
+    pass_len: int
+    special_char: bool
 
 
+@app.post("/passhome")
+def passGen(config:PasswordBase):
+    logger = logging.getLogger("uvicorn.error")
+    if config.special_char:
+        punctuation_list  = ["!","@","#","$","_","-"]
+        punctuation_string = "".join(punctuation_list)
+        passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits + punctuation_string
+        password =   "".join(random.choice(passwordChar)for char in range(config.pass_len))
+    else:
+        passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits 
+        password =   "".join(random.choice(passwordChar)for char in range(config.pass_len))
+    logger.info(password)
+    return {"password": password}
 
 
-
-
-
- 

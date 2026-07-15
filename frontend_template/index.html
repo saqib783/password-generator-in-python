@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
-    <!-- CSS File ko connect karne ke liye -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-
     <div class="container">
         <h2>Python Password Generator</h2>
         
-        <!-- Is box me password nazar aayega -->
-        <input type="text" id="passwordBox" placeholder="Your Password" readonly>
+        <!-- Options UI -->
+        <div class="options">
+            <label for="passLength">Password Length:</label>
+            <input type="number" id="passLength" min="6" max="32" value="12">
+            
+            <br><br>
+            
+            <label for="includeSymbols">Include Special Characters:</label>
+            <input type="checkbox" id="includeSymbols" checked>
+        </div>
         
-        <!-- Is button par click karne se password generate hoga -->
+        <br>
+        <input type="text" id="passwordBox" placeholder="Your Password" readonly>
         <button id="genBtn">Generate Password</button>
         <p id="textShow"></p>
     </div>
-   <script src="/static/script.js"></script>
+    
+    <script src="/static/script.js"></script>
 </body>
+</html>
