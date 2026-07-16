@@ -25,19 +25,32 @@ def home():
         return  file.read()
 
 class PasswordBase(BaseModel):
-    pass_len: int=Field(default=10, ge=6, le=32)
+    pass_len: int = 10
     special_char: bool
 
 
 @app.post("/passhome")
 def passGen(config:PasswordBase):
+    if config.pass_len > 32 or config.pass_len < 6:
+        return {"password": "Error: Length must be between 6 and 32!"}
+    lower = string.ascii_lowercase
+    upper = string.ascii_uppercase
+    digit = string.digits
+    punctation = string.punctuation
+    base_char = [
+        secrets.choice(lower),
+        secrets.choice(upper),
+        secrets.choice(digit)
+    ]
     if config.special_char:
-        punctuation_list  = ["!","@","#","$","_","-"]
-        punctuation_string = "".join(punctuation_list)
-        passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits + punctuation_string
-        password =   "".join(secrets.choice(passwordChar)for char in range(config.pass_len))
+        base_password = lower + upper + digit + punctation
     else:
-        passwordChar = string.ascii_lowercase + string.ascii_uppercase + string.digits 
-        password =   "".join(secrets.choice(passwordChar)for char in range(config.pass_len))
+        base_password = lower + upper + digit
     
-    return {"password": password}
+    remaining_length = config.pass_len - 3
+    remaining_pass = [secrets.choice(base_password) for i in range(remaining_length)]
+    password_list = remaining_pass + base_char
+    secrets.SystemRandom().shuffle(password_list)
+    full_password = "".join(password_list)
+    return {"password": full_password}
+
