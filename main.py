@@ -25,12 +25,14 @@ def home():
         return  file.read()
 
 class PasswordBase(BaseModel):
-    pass_len: int=Field(default=10, ge=6, le=32)
+    pass_len: int = 10
     special_char: bool
 
 
 @app.post("/passhome")
 def passGen(config:PasswordBase):
+    if config.pass_len > 32 or config.pass_len < 6:
+        return {"password": "Error: Length must be between 6 and 32!"}
     if config.special_char:
         punctuation_list  = ["!","@","#","$","_","-"]
         punctuation_string = "".join(punctuation_list)
