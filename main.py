@@ -4,7 +4,9 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse 
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel 
+import redis
+
 
 
 app = FastAPI()
@@ -17,6 +19,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.mount("/static",StaticFiles(directory="frontend_template"),name="static")
+r = redis.Redis(host='localhost',port=6379 , decode_responses= True)
+
+
+
 
 
 @app.get("/" ,response_class=HTMLResponse)
