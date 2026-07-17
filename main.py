@@ -36,18 +36,19 @@ def passGen(config:PasswordBase):
     lower = string.ascii_lowercase
     upper = string.ascii_uppercase
     digit = string.digits
-    punctation = string.punctuation
+    safe_punctuation = "!@#$%^&*()_+-=[]{}|;:,.<>?"
     base_char = [
         secrets.choice(lower),
         secrets.choice(upper),
         secrets.choice(digit)
     ]
     if config.special_char:
-        base_password = lower + upper + digit + punctation
+        base_password = lower + upper + digit + safe_punctuation
+        base_char.append(secrets.choice(safe_punctuation))
     else:
         base_password = lower + upper + digit
     
-    remaining_length = config.pass_len - 3
+    remaining_length = config.pass_len - len(base_char)
     remaining_pass = [secrets.choice(base_password) for i in range(remaining_length)]
     password_list = remaining_pass + base_char
     secrets.SystemRandom().shuffle(password_list)
